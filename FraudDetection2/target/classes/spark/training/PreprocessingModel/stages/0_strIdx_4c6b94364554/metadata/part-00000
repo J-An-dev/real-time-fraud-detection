@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1608170987018,"sparkVersion":"2.2.1","uid":"strIdx_4c6b94364554","paramMap":{"outputCol":"cc_num_indexed","handleInvalid":"error","inputCol":"cc_num"}}

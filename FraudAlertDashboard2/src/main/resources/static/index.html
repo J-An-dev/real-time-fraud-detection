@@ -1,0 +1,113 @@
+<html>
+
+<head>
+    <title>Fraud Transactions Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                Dashboard for Detected Fraud Transactions
+            </h2>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <!--<div class="col-md-12">-->
+        <div class="table-responsive-lg">
+            <table class="table table-bordered table-condensed table-hover outerTable" id="fraud">
+                <thead>
+                <tr>
+                    <th>cc_num</th>
+                    <th>trans_num</th>
+                    <th>trans_time</th>
+                    <th>trans_amount</th>
+                    <th>category</th>
+                    <th>merchant</th>
+                    <th>distance</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</br></br>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                Dashboard for Non-Fraud Transactions
+            </h2>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <!--<div class="col-md-12">-->
+        <div class="table-responsive-lg">
+            <table class="table table-bordered table-condensed table-hover outerTable" id="non-fraud">
+                <thead>
+                <tr>
+                    <th>cc_num</th>
+                    <th>trans_num</th>
+                    <th>trans_time</th>
+                    <th>trans_amount</th>
+                    <th>category</th>
+                    <th>merchant</th>
+                    <th>distance</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/sockjs-1.1.1.min.js"></script>
+<script type="text/javascript" src="js/stomp.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/Chart.min.js"></script>
+
+<script type="text/javascript">
+
+			//use sockjs			
+			var socket = new SockJS('/stomp');
+			var stompClient = Stomp.over(socket);
+            stompClient.connect({ }, function(frame) {
+				stompClient.subscribe("/topic/fraudData", function(data) {
+					var dataList = data.body;
+					var resp = jQuery.parseJSON(dataList);
+					//Fraud data
+					var totalOutput='';
+					jQuery.each(resp.fraudAlert, function(i,vh) {
+						 totalOutput +="<tr><td>"+vh.cc_num+"</td><td>"+vh.trans_num+"</td><td>"+vh.trans_time+"</td><td>"+vh.amt+"</td><td>"+ vh.category+"</td><td>"+vh.merchant+"</td><td>"+vh.distance+"</td></tr>";
+					});
+				 $("#fraud > tbody").append(totalOutput);
+				});
+                stompClient.subscribe("/topic/nonFraudData", function(data) {
+                    var dataList = data.body;
+                    var resp = jQuery.parseJSON(dataList);
+                    //Fraud data
+                    var totalOutput='';
+                    jQuery.each(resp.nonFraudAlert, function(i,vh) {
+                        totalOutput +="<tr><td>"+vh.cc_num+"</td><td>"+vh.trans_num+"</td><td>"+vh.trans_time+"</td><td>"+vh.amt+"</td><td>"+ vh.category+"</td><td>"+vh.merchant+"</td><td>"+vh.distance+"</td></tr>";
+                    });
+                    $("#non-fraud > tbody").append(totalOutput);
+                });
+            });
+
+</script>
+</body>
+</html>

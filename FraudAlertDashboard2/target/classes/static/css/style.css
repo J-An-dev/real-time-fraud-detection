@@ -1,0 +1,35 @@
+.table {
+    table-layout:fixed;
+}
+
+.table td {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.outerTable {
+    table-layout: fixed;
+    width:100%;
+    border: 1px solid black;
+}
+
+#fraud th {
+    text-align: center;
+    background-color: darkred;
+    color: white;
+}
+
+#non-fraud th {
+    text-align: center;
+    background-color: yellowgreen;
+    color: white;
+}
+
+.outerTable>thead>tr>th {
+    border: 1px solid black;
+}
+
+.outerTable td {
+    text-align: center;
+}
