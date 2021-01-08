@@ -1,0 +1,18 @@
+{ "type": "record",
+  "namespace" : "creditcard.transaction.avro",
+  "name": "Transaction",
+  "fields": [
+     {"name": "cc_num", "type": "string"},
+     {"name": "first", "type": "string"},
+     {"name": "last", "type": "string"},
+     {"name": "trans_num", "type": "string"},
+     {"name": "trans_date", "type": "string"},
+     {"name": "trans_time", "type": "string"},
+     {"name": "unix_time", "type": "string"},
+     {"name": "category", "type": "string"},
+     {"name": "merchant", "type": "string"},
+     {"name": "amt", "type": "double"},
+     {"name": "merch_lat", "type": "string"},
+     {"name": "merch_long", "type": "string"}
+   ]
+}
