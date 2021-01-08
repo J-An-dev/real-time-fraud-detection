@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Statement</title>
+    <style>
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+<h2>Transaction Statement for Customer <a href="http://0.0.0.0:5050/api/customer/{{cc_num}}">{{ cc_num }}</a></h2>
+{% for table in tables %}
+    {{ table|safe }}
+{% endfor %}
+</body>
+</html>
