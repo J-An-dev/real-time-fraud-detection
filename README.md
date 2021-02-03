@@ -7,7 +7,7 @@ For the set-up part, I first simulate 100 customers' information and stored in t
 
 After the models are saved to the file system, start a Spark Streaming job that would load the ML models and also consume credit card transactions from Kafka. Create a Kafka topic and produce transaction records from the `transaction_testing.csv` file as messages that would be consumed by the Spark Streaming job. And the streaming job would predict whether these transactions are fraud or not and then save them into the `fraud_transaction` and `non_fraud_transaction` tables separately based on the classification.
 
-With the classified in-coming transaction records stored in the Cassandra database, I use the Spring Boot framework to display the frand and non-fraud transactions in real-time on the dashboard web page. Meanwhile, I also use the Flask framework to create two REST APIs that could easily retrieve the customer's information and create the transaction statement for each customer.
+With the classified in-coming transaction records stored in the Cassandra database, I use the Spring Boot framework to display the fraud and non-fraud transactions in real-time on the dashboard web page. Meanwhile, I also use the Flask framework to create two REST APIs that could easily retrieve the customer's information and create the transaction statement for each customer.
 
 __A video demo for the workflow could be found here:__ https://youtu.be/fOVsxk16b0w
 
